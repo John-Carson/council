@@ -5,6 +5,15 @@
 echo "Starting LLM Council..."
 echo ""
 
+# Kill any processes running on ports 8001 and 5173
+for port in 8001 5173; do
+    pid=$(lsof -ti tcp:$port)
+    if [ -n "$pid" ]; then
+        echo "Killing process on port $port (PID $pid)..."
+        kill -9 $pid 2>/dev/null
+    fi
+done
+
 # Start backend
 echo "Starting backend on http://localhost:8001..."
 uv run python -m backend.main &
