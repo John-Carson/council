@@ -10,10 +10,10 @@ OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
 # Council members - list of OpenRouter model identifiers
 COUNCIL_MODELS = [
-    "qwen/qwen3-max",
     "openai/gpt-5.1",
     "x-ai/grok-4.1-fast",
-    "anthropic/claude-sonnet-4.5",
+    "anthropic/claude-opus-4.5",
+    "moonshotai/kimi-k2-thinking",
 ]
 
 # Chairman model - synthesizes final response
