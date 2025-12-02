@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import Stage1 from './Stage1';
 import Stage2 from './Stage2';
 import Stage3 from './Stage3';
+import CollapsibleSection from './CollapsibleSection';
 import './ChatInterface.css';
 
 export default function ChatInterface({
@@ -79,7 +80,11 @@ export default function ChatInterface({
                       <span>Running Stage 1: Collecting individual responses...</span>
                     </div>
                   )}
-                  {msg.stage1 && <Stage1 responses={msg.stage1} />}
+                  {msg.stage1 && (
+                    <CollapsibleSection title="Stage 1: Individual Responses" defaultOpen={false}>
+                      <Stage1 responses={msg.stage1} />
+                    </CollapsibleSection>
+                  )}
 
                   {/* Stage 2 */}
                   {msg.loading?.stage2 && (
@@ -89,11 +94,13 @@ export default function ChatInterface({
                     </div>
                   )}
                   {msg.stage2 && (
-                    <Stage2
-                      rankings={msg.stage2}
-                      labelToModel={msg.metadata?.label_to_model}
-                      aggregateRankings={msg.metadata?.aggregate_rankings}
-                    />
+                    <CollapsibleSection title="Stage 2: Peer Rankings" defaultOpen={false}>
+                      <Stage2
+                        rankings={msg.stage2}
+                        labelToModel={msg.metadata?.label_to_model}
+                        aggregateRankings={msg.metadata?.aggregate_rankings}
+                      />
+                    </CollapsibleSection>
                   )}
 
                   {/* Stage 3 */}
@@ -103,7 +110,11 @@ export default function ChatInterface({
                       <span>Running Stage 3: Final synthesis...</span>
                     </div>
                   )}
-                  {msg.stage3 && <Stage3 finalResponse={msg.stage3} />}
+                  {msg.stage3 && (
+                    <CollapsibleSection title="Stage 3: Final Council Answer" defaultOpen={true}>
+                      <Stage3 finalResponse={msg.stage3} />
+                    </CollapsibleSection>
+                  )}
                 </div>
               )}
             </div>
